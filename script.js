@@ -6,32 +6,27 @@ function checkSums(array){
   for (let i=0; i < array.length - 5; i++) {
     for (let j=1; j < 5; j++){
       checkedSums.push(array[i] + array[i+j])
+    }  
       let answers = [...checkedSums]
       if (answers.includes(array[i+5])) {
         continue
       } else results.push(array[i+5])
-    }
 
   }
-  return results
-}
-
-function flattenResults(results) {
-  return results.map(item => item[0])
+  return checkedSums.length
 }
 
 function returnItemOfInterest(results){
   let problem = []
-  for (let i = 0; i < results.length; i++) {
-    
-    if (results[i] > 0) {
-      continue
-    } else problem.push(i)
+  for (let i = 0; i < testArray.length; i++) {
+    if (!results.includes(testArray[i])) {
+      problem.push(testArray[i])
+    }
   }
-  return testArray[problem[0]+5]
+  return problem
 }
-
 console.log(checkSums(testArray))
+//console.log(returnItemOfInterest(checkSums(testArray)))
 //console.log(returnItemOfInterest(flattenResults(checkSums(testArray))))
 
 // async function getAllData() {
