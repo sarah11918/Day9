@@ -1,31 +1,83 @@
 let testArray = [35,20,15,25,47,40,62,55,65,95,102,117,150,182,127,219,299,277,309,576]
 
 let results = []
-function checkSums(array){
-   let checkedSums = []
-  for (let i=0; i < array.length - 5; i++) {
-    for (let j=1; j < 5; j++){
-      checkedSums.push(array[i] + array[i+j])
-    }  
-      let answers = [...checkedSums]
-      if (answers.includes(array[i+5])) {
-        continue
-      } else results.push(array[i+5])
 
-  }
-  return checkedSums.length
+function breakIntoSubArrays(array) {
+  array.forEach(element => {
+  results.push([...array.slice(array.indexOf(element),array.indexOf(element) + 5)])
+  })
+  return results.filter(item => item.length === 5).slice(0,-1)
 }
 
-function returnItemOfInterest(results){
-  let problem = []
-  for (let i = 0; i < testArray.length; i++) {
-    if (!results.includes(testArray[i])) {
-      problem.push(testArray[i])
-    }
-  }
-  return problem
+
+
+console.log(breakIntoSubArrays(testArray))
+
+function checkSums(array) {
+  let step1 = [...array.slice(5)]
+  // console.log(step1)
+
+  // console.log (array.indexOf(array[0]))
+  step1.forEach(element => {
+    results.push(
+      [...array.slice(
+          array[array.indexOf(element) - 5], array.indexOf(element))
+      ]
+  )})
+  return results
 }
-console.log(checkSums(testArray))
+//console.log(checkSums(testArray)) 
+
+// function checkSums(array){
+//   let checkedSums = []
+//   for (let i=0; i < array.length - 5; i++) {
+//     for (let j=1; j < 5; j++){
+//       checkedSums.push(array[i] + array[i+j])
+//       // let answers = [
+//       //   array[5],
+//       //   ...checkedSums.slice(0,5),
+//       //   array[6],
+//       //   ...checkedSums.slice(5,10),
+//       //   array[7],
+//       //   ...checkedSums.slice(10,15),
+//       //   array[8],
+//       //   ...checkedSums.slice(15,20),
+//       //   array[9],
+//       //   ...checkedSums.slice(20,25),
+//       //   array[10],
+//       //   ...checkedSums.slice(25,30),
+//       //   array[11],
+//       //   ...checkedSums.slice(30,35),
+//       //   array[12],
+//       //   ...checkedSums.slice(35,40),
+//       //   array[13],
+//       //   ...checkedSums.slice(40,45),
+//       //   array[14],
+//       //   ...checkedSums.slice(45,50),
+//       //   array[15],
+//       //   ...checkedSums.slice(50,55),
+//       //   array[16],
+//       //   ...checkedSums.slice(55)
+//     }  
+//       // let answers = [...checkedSums]
+//       // if (answers.includes(array[i+5])) {
+//       //   continue
+//       // } else results.push(array[i+5])
+
+//   }
+//   return checkedSums
+// }
+
+// function returnItemOfInterest(results){
+//   let problem = []
+//   for (let i = 0; i < testArray.length; i++) {
+//     if (!results.includes(testArray[i])) {
+//       problem.push(testArray[i])
+//     }
+//   }
+//   return problem.slice(6)
+// }
+// console.log(checkSums(testArray).length)
 //console.log(returnItemOfInterest(checkSums(testArray)))
 //console.log(returnItemOfInterest(flattenResults(checkSums(testArray))))
 
