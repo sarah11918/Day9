@@ -6,33 +6,34 @@ function breakIntoSubArrays(array) {
   array.forEach(element => {
   results.push([...array.slice(array.indexOf(element),array.indexOf(element) + 5)])
   })
-  return results.filter(item => item.length === 5).slice(0,-1)
+  let subArrays = results.filter(item => item.length === 5).slice(0,-1)
+  return subArrays
 }
 
 
+function checkSums(array){
+  let responses = []
+  for (let n = 0; n<array.length; n++) {
+    let checkedSums = []
+    for (let i = 0; i < 5; i++) {
+      for (let j = 1; j < 5; j++) {
+        if (array[n][i] + array[n][i+j] > 0) {
+        checkedSums.push(array[n][i] + array[n][i+j])
+        }
+       
+      }
+    }
+    responses = [...responses, [...checkedSums]]
 
-console.log(breakIntoSubArrays(testArray))
-
-function checkSums(array) {
-  let step1 = [...array.slice(5)]
-  // console.log(step1)
-
-  // console.log (array.indexOf(array[0]))
-  step1.forEach(element => {
-    results.push(
-      [...array.slice(
-          array[array.indexOf(element) - 5], array.indexOf(element))
-      ]
-  )})
-  return results
+  }
+ //console.log("done")
+ return responses
 }
-//console.log(checkSums(testArray)) 
 
-// function checkSums(array){
-//   let checkedSums = []
-//   for (let i=0; i < array.length - 5; i++) {
-//     for (let j=1; j < 5; j++){
-//       checkedSums.push(array[i] + array[i+j])
+console.log(checkSums(breakIntoSubArrays(testArray)))
+
+  
+       
 //       // let answers = [
 //       //   array[5],
 //       //   ...checkedSums.slice(0,5),
@@ -78,8 +79,8 @@ function checkSums(array) {
 //   return problem.slice(6)
 // }
 // console.log(checkSums(testArray).length)
-//console.log(returnItemOfInterest(checkSums(testArray)))
-//console.log(returnItemOfInterest(flattenResults(checkSums(testArray))))
+// console.log(returnItemOfInterest(checkSums(testArray)))
+// console.log(returnItemOfInterest(flattenResults(checkSums(testArray))))
 
 // async function getAllData() {
 //   let response = await fetch('Day9.txt')
