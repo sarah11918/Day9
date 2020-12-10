@@ -1,4 +1,5 @@
 let testArray = [35,20,15,25,47,40,62,55,65,95,102,117,150,182,127,219,299,277,309,576]
+let testNumber = 127
 
 async function getAllData() {
   let response = await fetch('Day9-1.txt')
@@ -35,9 +36,39 @@ function runBigCheck (originalNumbers, groupSize) {
   return possibleSolutions.filter(element => !firstNumbers.includes(element))
 }
 
+function everythingLeftOf(items, target) {
+  return items.slice(0, items.indexOf(target))
+}
 
-getAllData()
-.then(lines)
-.then(parseNumbers)
-.then(numbers => runBigCheck(numbers, 25))
-.then(result => console.log(result))
+function lookForConsecutiveNumbers (originalNumbers, numberToCheck) {
+  let index = originalNumbers.indexOf(numberToCheck)
+  let solutionSpace = originalNumbers.slice(0,index)
+  for (let i=2; i< solutionSpace.length; i++){
+
+    if (solutionSpace.slice(-i).reduce((acc, total) => total + acc,0) === numberToCheck ) {
+      return solutionSpace.slice(-i)
+    }
+  
+  }
+  // console.log(solutionSpace.slice(-2).reduce((acc, total) => {
+  //   return total + acc
+  // },0))
+  // console.log(solutionSpace.slice(-3).reduce((acc, total) => {
+  //   return total + acc
+  // },0))
+  return []
+}
+
+console.log(lookForConsecutiveNumbers(testArray, testNumber))
+//FOR PART A
+// getAllData()
+// .then(lines)
+// .then(parseNumbers)
+// .then(numbers => runBigCheck(numbers, 25))
+// .then(result => console.log(result))
+
+//FOR PART B
+// getAllData()
+// .then(lines)
+// .then(parseNumbers)
+// .then(result => console.log(result))
