@@ -72,20 +72,19 @@ function checkAllPosibleConsecutiveNumberLengths (originalNumbers, numberToCheck
 
   return Math.min(...answer[0]) + Math.max(...answer[0])
 }
+//console.log(checkAllPosibleConsecutiveNumberLengths(testArray, 127))
 
-
-
-console.log(checkAllPosibleConsecutiveNumberLengths(testArray, 127))
 
 //FOR PART A
 // getAllData()
 // .then(lines)
 // .then(parseNumbers)
 // .then(numbers => runBigCheck(numbers, 25))
-// .then(result => console.log(result))
+// .then(result => console.log(result) //373803594
 
 //FOR PART B
-// getAllData()
-// .then(lines)
-// .then(parseNumbers)
-// .then(result => console.log(result))
+getAllData()
+.then(lines)
+.then(parseNumbers)
+.then(numbers => checkAllPosibleConsecutiveNumberLengths(numbers,373803594))
+.then(result => console.log(result)) //51152360
