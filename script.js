@@ -27,6 +27,7 @@ function lookForSolution(numbers, numberToCheck, groupSize) {
   }   else return 0
 }
 
+//FOR PART B
 function runBigCheck (originalNumbers, groupSize) {
   let firstNumbers = originalNumbers.slice(0,groupSize)
   let numbersToCheck = originalNumbers.slice(groupSize)
@@ -40,25 +41,47 @@ function everythingLeftOf(items, target) {
   return items.slice(0, items.indexOf(target))
 }
 
-function lookForConsecutiveNumbers (originalNumbers, numberToCheck) {
+function lookForConsecutiveNumbers (originalNumbers, numberToCheck, endpointOfSolutionSpaceToCheck) {
   let solutionSpace = everythingLeftOf(originalNumbers, numberToCheck)
-  for (let i=2; i < solutionSpace.length; i++){
-
-    if (solutionSpace.slice(-i).reduce((acc, total) => total + acc,0) === numberToCheck ) {
-      return solutionSpace.slice(-i)
+  for (let i = 0; i < endpointOfSolutionSpaceToCheck; i++){
+    for (let j = i+1; j < endpointOfSolutionSpaceToCheck; j++) {
+      let consecutiveSum = solutionSpace.slice(i,j).reduce((acc,total)=> {
+        return total + acc
+      },0)
+      if (consecutiveSum === numberToCheck) {
+        return solutionSpace.slice(i,j)
+      }
     }
-  
   }
-  // console.log(solutionSpace.slice(-2).reduce((acc, total) => {
-  //   return total + acc
-  // },0))
-  // console.log(solutionSpace.slice(-3).reduce((acc, total) => {
-  //   return total + acc
-  // },0))
+  
   return []
 }
 
-console.log(lookForConsecutiveNumbers(testArray, testNumber))
+// console.log(lookForConsecutiveNumbers(testArray, 127, 7))
+
+function checkAllPosibleConsecutiveNumberLengths (originalNumbers, numberToCheck) {
+  let answer = []
+  let longestPossibleConsecutiveList = everythingLeftOf(originalNumbers,numberToCheck).length
+   //console.log(longestPossibleConsecutiveList)
+  
+  for (let i = 0; i < longestPossibleConsecutiveList; i++) {
+    
+    let solution = lookForConsecutiveNumbers(originalNumbers, numberToCheck, i)
+    if (solution.length > 1 ) {
+      answer.push(solution)}
+    
+      // return (lookForConsecutiveNumbers(originalNumbers, numberToCheck, i))
+    
+   
+    
+  }
+  return answer
+}
+
+
+
+console.log(checkAllPosibleConsecutiveNumberLengths(testArray, 127))
+
 //FOR PART A
 // getAllData()
 // .then(lines)
