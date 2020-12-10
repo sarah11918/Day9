@@ -41,9 +41,8 @@ function everythingLeftOf(items, target) {
 }
 
 function lookForConsecutiveNumbers (originalNumbers, numberToCheck) {
-  let index = originalNumbers.indexOf(numberToCheck)
-  let solutionSpace = originalNumbers.slice(0,index)
-  for (let i=2; i< solutionSpace.length; i++){
+  let solutionSpace = everythingLeftOf(originalNumbers, numberToCheck)
+  for (let i=2; i < solutionSpace.length; i++){
 
     if (solutionSpace.slice(-i).reduce((acc, total) => total + acc,0) === numberToCheck ) {
       return solutionSpace.slice(-i)
