@@ -62,20 +62,15 @@ function lookForConsecutiveNumbers (originalNumbers, numberToCheck, endpointOfSo
 function checkAllPosibleConsecutiveNumberLengths (originalNumbers, numberToCheck) {
   let answer = []
   let longestPossibleConsecutiveList = everythingLeftOf(originalNumbers,numberToCheck).length
-   //console.log(longestPossibleConsecutiveList)
   
   for (let i = 0; i < longestPossibleConsecutiveList; i++) {
     
     let solution = lookForConsecutiveNumbers(originalNumbers, numberToCheck, i)
     if (solution.length > 1 ) {
-      answer.push(solution)}
-    
-      // return (lookForConsecutiveNumbers(originalNumbers, numberToCheck, i))
-    
-   
-    
+      answer.push(solution)}    
   }
-  return answer
+
+  return Math.min(...answer[0]) + Math.max(...answer[0])
 }
 
 
